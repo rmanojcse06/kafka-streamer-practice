@@ -10,3 +10,11 @@ services:
       - ./infra/mongodb-init/mongo-replica-set-init.sh:/usr/local/bin/mongo-replica-set-init.sh:ro
     networks:
       - mongo-net
+
+volumes:
+  mongo_data:
+    external: true
+
+networks:
+  mongo-net:
+    driver: bridge
