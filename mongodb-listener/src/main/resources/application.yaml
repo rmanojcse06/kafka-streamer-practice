@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri:
+
+server:
+  port: 19071

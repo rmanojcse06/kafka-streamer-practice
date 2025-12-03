@@ -1,0 +1,12 @@
+services:
+  kstream-infra-mongo:
+    image: mongo:7.0
+    container_name: kstream-infra-mongo-01
+    ports:
+      - "27017:27017"
+    entrypoint: [ "bash", "/usr/local/bin/mongo-replica-set-init.sh" ]
+    volumes:
+      - ./infra/mongodb-keyfile/mongo-keyfile:/etc/mongo-keyfile:ro
+      - ./infra/mongodb-init/mongo-replica-set-init.sh:/usr/local/bin/mongo-replica-set-init.sh:ro
+    networks:
+      - mongo-net
