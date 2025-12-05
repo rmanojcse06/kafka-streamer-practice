@@ -52,7 +52,7 @@ public class ChangeStreamMongoListener {
                 .retry()  // <--- IMPORTANT: automatic restart
                 .subscribe(event -> {
                     Document rawData = event.getBody();
-                    log.info("MongoDB rawData: {}", event.getBody());
+                    log.info("MongoDB rawData: {} and operation: {}", event.getBody(), event.getOperationType() );
         });
         log.info("✔ MongoDB change stream listener registered for inventory collection");
     }
