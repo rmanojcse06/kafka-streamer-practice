@@ -13,6 +13,7 @@
 
     <modules>
         <module>mongodb-listener</module>
+        <module>brand-extractor</module>
     </modules>
 
     <properties>

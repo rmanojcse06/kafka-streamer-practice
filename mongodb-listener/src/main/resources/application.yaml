@@ -1,7 +1,14 @@
+server:
+  port: 19071
+
 spring:
   data:
     mongodb:
       uri: mongodb://inventorydba:password@localhost:27017/rawsrcdb?authSource=admin
 
-server:
-  port: 19071
+logging:
+  level:
+    root: debug
+    org.springframework.web: DEBUG
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
+    org.mongodb.driver: info
