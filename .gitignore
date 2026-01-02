@@ -46,3 +46,5 @@ secrets.yml
 .git-hooks/
 node_modules
 /.kotlin/
+**/target/
+.DS_Store
