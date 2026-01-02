@@ -20,6 +20,8 @@
         <java.version>17</java.version>
         <spring.boot.version>3.3.2</spring.boot.version>
         <mongo.driver.version>4.11.1</mongo.driver.version>
+        <kafka.version>3.6.1</kafka.version>
+        <reactor.kafka.version>1.3.25</reactor.kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -68,6 +70,23 @@
                 <artifactId>lombok</artifactId>
                 <version>1.18.42</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-streams</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor.kafka</groupId>
+                <artifactId>reactor-kafka</artifactId>
+                <version>${reactor.kafka.version}</version>
             </dependency>
 
         </dependencies>

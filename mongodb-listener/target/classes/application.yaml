@@ -5,6 +5,11 @@ spring:
   data:
     mongodb:
       uri: mongodb://inventorydba:password@localhost:27017/rawsrcdb?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 logging:
   level:
