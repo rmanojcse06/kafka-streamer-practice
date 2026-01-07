@@ -14,6 +14,7 @@
     <modules>
         <module>mongodb-listener</module>
         <module>brand-extractor</module>
+        <module>simple-kafka-streamer-p1</module>
     </modules>
 
     <properties>
