@@ -15,6 +15,7 @@
         <module>mongodb-listener</module>
         <module>brand-extractor</module>
         <module>simple-kafka-streamer-p1</module>
+        <module>dag-kafka-streamer-p2</module>
     </modules>
 
     <properties>

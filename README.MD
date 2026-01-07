@@ -7,6 +7,28 @@ docker-compose -f docker-compose.yaml up -d kstream-infra-mongo
 docker-compose -f docker-compose.yaml exec kstream-infra-mongo bash 
   mongosh "mongodb://inventorydba:password@localhost:27017/rawsrcdb" --authenticationDatabase admin
 ```
+```bash
+cd dag-kafka-streamer-p2
+#mvn spring-boot:run -Dstart-class=edu.man.kafka.streamer.SimpleFirstStreamingApp
+mvn exec:java -Dexec.mainClass=edu.man.kafka.streamer.RealStreamingApp
+mvn dependency:tree
+docker-compose -f ../docker-compose.yaml exec kstream-infra-kafka bash
+kafka-console-consumer --bootstrap-server localhost:29092 --topic man.sink.brand.data
+
+docker-compose -f ../docker-compose.yaml exec kstream-infra-kafka bash
+kafka-topics --bootstrap-server localhost:29092 --create --topic man.src.raw.data --partitions 3 --replication-factor 1
+kafka-topics --bootstrap-server localhost:29092 --list
+kafka-console-producer --bootstrap-server localhost:29092 --topic man.src.raw.data --property parse.key=true --property key.separator=-
+```
+
+
+
+
+
+
+
+
+
 
 ```bash
 cd simple-kafka-streamer-p1
