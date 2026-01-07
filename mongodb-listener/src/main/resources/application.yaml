@@ -6,14 +6,25 @@ spring:
     mongodb:
       uri: mongodb://inventorydba:password@localhost:27017/rawsrcdb?authSource=admin
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:29092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+    default-property-inclusion: non_null
+
 
 logging:
   level:
-    root: debug
+    root: INFO
     org.springframework.web: DEBUG
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
-    org.mongodb.driver: info
+    org.mongodb.driver: INFO
+
+app:
+  mongodb:
+    collection: rawdata
+  kafka:
+    topic: man.event.raw.stream

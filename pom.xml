@@ -89,6 +89,26 @@
                 <version>${reactor.kafka.version}</version>
             </dependency>
 
+            <!-- Jackson JSR310 to support 'write-dates-as-timestamps: false' -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>2.20.1</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+<!--                <configuration>-->
+<!--                    <mainClass>com.yourpackage.YourMainClass</mainClass>-->
+<!--                </configuration>-->
+            </plugin>
+        </plugins>
+    </build>
 </project>
