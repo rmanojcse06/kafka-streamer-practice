@@ -1,0 +1,19 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "edu.man.proto.grpc.generated";
+
+service BrandStreamService {
+  // server side streaming request
+  rpc ProcessBrands(stream BrandStreamRequest) returns (stream BrandStreamResponse);
+}
+
+message BrandStreamRequest {
+  string name = 1;
+}
+
+message BrandStreamResponse {
+  string message = 1;
+  int64 current_time = 2;
+}
+
+
