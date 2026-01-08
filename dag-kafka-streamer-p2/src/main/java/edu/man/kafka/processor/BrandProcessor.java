@@ -8,6 +8,7 @@ import org.apache.kafka.streams.processor.api.Processor;
 import org.apache.kafka.streams.processor.api.ProcessorContext;
 import org.apache.kafka.streams.processor.api.Record;
 import org.apache.kafka.streams.processor.api.RecordMetadata;
+import org.apache.kafka.streams.state.KeyValueStore;
 
 import java.util.Locale;
 
@@ -15,12 +16,14 @@ import java.util.Locale;
 public class BrandProcessor implements Processor<String,String,String, Brand> {
 
     private ProcessorContext<String, Brand> processorContext;
+    private KeyValueStore<String, Long> stateStore;
+
     @Override
     public void init(ProcessorContext<String, Brand> context) {
         log.info("Inside BrandProcessor initialization");
         Processor.super.init(context);
         this.processorContext = context;
-
+        this.stateStore = context.getStateStore("brand-counts-store");
     }
 
     @Override
@@ -38,7 +41,15 @@ public class BrandProcessor implements Processor<String,String,String, Brand> {
             if(bParams.length > 0) {
                 String brandName = bParams.length > 0 ? bParams[0] : "";
                 String brandColor = bParams.length > 1? bParams[1]: "NIL";
-                Brand brand = new Brand(recordMetadata.offset(), brandName, brandColor);
+
+                Long currentCount = stateStore.get(brandName);
+                if (currentCount == null) {
+                    currentCount = 0L;
+                }
+                long newCount = currentCount + 1;
+                stateStore.put(brandName, newCount);
+
+                Brand brand = new Brand(currentCount, brandName, brandColor);
                 final Headers kafkaHeaders = new RecordHeaders();
                 kafkaHeaders.add("header-timestamp", new String(System.currentTimeMillis()+"").getBytes());
                 Record<String, Brand> outRecord = new Record<>(inRecord.key().toLowerCase(),

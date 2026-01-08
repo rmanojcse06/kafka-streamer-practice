@@ -13,6 +13,9 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.errors.LogAndContinueExceptionHandler;
 import org.apache.kafka.streams.processor.api.ProcessorSupplier;
+import org.apache.kafka.streams.state.KeyValueStore;
+import org.apache.kafka.streams.state.StoreBuilder;
+import org.apache.kafka.streams.state.Stores;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
@@ -43,6 +46,12 @@ public class RealStreamingApp {
         t.addProcessor("process-1",
                 new BrandProcessorSupplier(),
                 "init-source-node");
+        StoreBuilder<KeyValueStore<String, Long>> brandCountStoreBuilder = Stores.keyValueStoreBuilder(
+                Stores.persistentKeyValueStore("brand-counts-store"),
+                Serdes.String(),
+                Serdes.Long()
+        );
+        t.addStateStore(brandCountStoreBuilder, "process-1");
         t.addSink("brand-sink-node",
                 "man.sink.brand.data",
                 Serdes.String().serializer(),

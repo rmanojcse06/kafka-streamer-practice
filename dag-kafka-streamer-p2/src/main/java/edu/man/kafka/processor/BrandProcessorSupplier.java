@@ -5,6 +5,7 @@ import org.apache.kafka.streams.processor.api.Processor;
 import org.apache.kafka.streams.processor.api.ProcessorSupplier;
 import org.apache.kafka.streams.state.StoreBuilder;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class BrandProcessorSupplier implements ProcessorSupplier<String,String,String, Brand> {
@@ -16,6 +17,6 @@ public class BrandProcessorSupplier implements ProcessorSupplier<String,String,S
 
     @Override
     public Set<StoreBuilder<?>> stores() {
-        return ProcessorSupplier.super.stores();
+        return Collections.emptySet();
     }
 }
