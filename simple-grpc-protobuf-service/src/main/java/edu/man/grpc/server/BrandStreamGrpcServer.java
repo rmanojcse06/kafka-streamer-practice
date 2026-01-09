@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 @Slf4j
-public class BrandStreamServer {
+public class BrandStreamGrpcServer {
     public static void main(String[] args) {
         log.info("Starting BrandServer to test gRPC Streaming application on port 15051");
         try {

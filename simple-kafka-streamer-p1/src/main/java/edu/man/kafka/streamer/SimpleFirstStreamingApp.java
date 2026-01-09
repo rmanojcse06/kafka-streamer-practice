@@ -23,6 +23,7 @@ public class SimpleFirstStreamingApp {
         myFirstStream.peek((k,v)->log.info("Stream k is {} and v is {}", k,v))
                 .mapValues(v->v.toLowerCase())
                 .filter((k,v)->k.contains("red"))
+                .selectKey((k,v)->k.toLowerCase())
                 .peek((k,v)->log.info("Passing over topic key {} and value {} ",k,v))
                 .to("man.simple.first.red.sink.topic",
                         Produced.with(Serdes.String(), Serdes.String()));

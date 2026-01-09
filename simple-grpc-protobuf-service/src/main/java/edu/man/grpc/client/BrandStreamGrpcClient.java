@@ -14,7 +14,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class BrandStreamClient {
+public class BrandStreamGrpcClient {
     public static void main(String[] args) {
         log.info("Starting BrandStreamClient and requesting data from channel {}", 15051);
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 15051)

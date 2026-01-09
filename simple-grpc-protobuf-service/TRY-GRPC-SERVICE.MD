@@ -24,12 +24,12 @@ rpc ProcessBrands(stream BrandStreamRequest) returns (stream BrandStreamResponse
 ```bash
 cd simple-grpc-protobuf-service 
 mvn clean install
-mvn exec:java -Dexec.mainClass=edu.man.grpc.server.BrandStreamServer
+mvn exec:java -Dexec.mainClass=edu.man.grpc.server.BrandStreamGrpcServer
 ```
 
 ## Step(3): Start BrandStreamClient
 ```bash
 cd simple-grpc-protobuf-service
 mvn clean install 
-mvn exec:java -Dexec.mainClass=edu.man.grpc.client.BrandStreamClient
+mvn exec:java -Dexec.mainClass=edu.man.grpc.client.BrandStreamGrpcClient
 ```
